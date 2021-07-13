@@ -23,11 +23,11 @@ jobs:
       run: dotnet build --no-restore
     - name: Test
       run: dotnet test --no-build --verbosity normal
-    - name: XUnit Viewer
-      id: xunit-viewer
-      uses: AutoModality/action-xunit-viewer@v1  
-    - name: Attach the report
-      uses: actions/upload-artifact@v1
+    - name: Unit tests [publish]
+      uses: dorny/test-reporter@v1
+      if: always()
       with:
-        name: ${{ steps.xunit-viewer.outputs.report-name }}
-        path: ${{ steps.xunit-viewer.outputs.report-dir }}
+        name: Unit tests
+        path: ${{ github.workspace }}/path/to/artifacts/testresults/test_results_unit_test.trx
+        reporter: dotnet-trx
+        token: ${{ secrets.GITHUB_TOKEN }}
