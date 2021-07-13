@@ -28,6 +28,6 @@ jobs:
       if: always()
       with:
         name: Unit tests
-        path: ${{ github.workspace }}/path/to/artifacts/testresults/test_results_unit_test.trx
+        path: ${{ github.workspace }}/**/*.trx
         reporter: dotnet-trx
         token: ${{ secrets.GITHUB_TOKEN }}
